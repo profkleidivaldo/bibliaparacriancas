@@ -2,63 +2,76 @@
 <html lang="pt-BR">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Bíblia Ilustrada para Crianças</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Bíblia Ilustrada</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E📖%3C/text%3E%3C/svg%3E">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <header class="topo">
-    <h1>📖 Bíblia Ilustrada para Crianças</h1>
-    <p>Escolha uma história, leia, colora o desenho e monte a sua página!</p>
-  </header>
 
-  <nav id="historias" class="historias" aria-label="Histórias"></nav>
+  <!-- Índice das histórias -->
+  <section id="indice" aria-label="Índice de histórias">
+    <header class="topo"><h1>📖 Bíblia Ilustrada</h1></header>
+    <div id="lista"></div>
+  </section>
 
-  <main class="area">
-    <section class="ferramentas" aria-label="Ferramentas de desenho">
-      <h2>🎨 Ferramentas</h2>
-      <div id="cores" class="cores"></div>
-      <label>Tamanho do pincel
-        <input type="range" id="tamanho" min="2" max="40" value="10">
-      </label>
-      <div class="botoes">
-        <button id="pincel" class="ativo">🖌️ Pincel</button>
-        <button id="borracha">🧽 Borracha</button>
-        <button id="desfazer">↩️ Desfazer</button>
-        <button id="limpar">🗑️ Limpar</button>
-      </div>
-      <label class="check"><input type="checkbox" id="contorno" checked> Mostrar contorno do desenho</label>
-      <div class="botoes">
-        <button id="outro" hidden>🔄 Outro desenho</button>
-      </div>
-      <label class="arquivo">📷 Usar foto de um desenho feito no papel
-        <input type="file" id="foto" accept="image/*">
-      </label>
-      <label>Seu nome
-        <input type="text" id="nome" maxlength="40" placeholder="Ilustrado por...">
-      </label>
-      <div class="botoes">
-        <button id="baixar">⬇️ Baixar desenho (PNG)</button>
-        <button id="imprimir" class="destaque">🖨️ Imprimir / Salvar PDF</button>
-      </div>
-    </section>
+  <!-- Página da história -->
+  <section id="historia" hidden>
+    <header class="barra-topo">
+      <a href="#/" class="voltar" aria-label="Voltar ao índice">←</a>
+      <span id="tituloTopo" class="titulo-topo"></span>
+    </header>
 
-    <section id="pagina" class="pagina" aria-label="Página da história">
-      <h2 id="titulo"></h2>
-      <p id="referencia" class="referencia"></p>
-      <div class="quadro" id="quadro">
+    <article id="pagina" class="pagina">
+      <h2 id="titulo" class="so-impressao"></h2>
+      <div class="quadro">
         <canvas id="desenho" width="800" height="600"></canvas>
         <img id="contornoImg" alt="Contorno para colorir" draggable="false">
       </div>
       <p id="credito" class="credito"></p>
+      <p id="referencia" class="referencia"></p>
       <div id="texto" class="texto"></div>
       <p id="assinatura" class="assinatura"></p>
-    </section>
-  </main>
+    </article>
 
-  <footer class="rodape">
-    Textos recontados em linguagem simples a partir da Bíblia. Ilustrações originais do projeto e, quando indicado, desenhos de bancos gratuitos com os créditos abaixo da imagem. Veja CREDITOS.md.
-  </footer>
+    <!-- Cores e tamanho do pincel -->
+    <div id="paleta" class="popover" hidden>
+      <div id="cores" class="cores"></div>
+      <label class="tamanho">Pincel
+        <input type="range" id="tamanho" min="3" max="40" value="12" aria-label="Tamanho do pincel">
+      </label>
+    </div>
+
+    <!-- Mais opções -->
+    <div id="mais" class="popover" hidden>
+      <label class="linha"><input type="checkbox" id="contorno" checked> Mostrar contorno</label>
+      <label class="linha">Seu nome
+        <input type="text" id="nome" maxlength="40" placeholder="Ilustrado por...">
+      </label>
+      <div class="acoes">
+        <button id="limpar">🗑️ Limpar</button>
+        <label class="botao">📷 Foto do papel<input type="file" id="foto" accept="image/*" hidden></label>
+        <button id="baixar">⬇️ PNG</button>
+        <button id="imprimir" class="destaque">🖨️ Imprimir / PDF</button>
+      </div>
+    </div>
+
+    <!-- Barra de pintura (recolhível) -->
+    <nav id="barra" class="barra" aria-label="Ferramentas de pintura">
+      <button id="btnCor" aria-label="Escolher cor"></button>
+      <button id="pincel" class="ativo" aria-label="Pincel">🖌️</button>
+      <button id="borracha" aria-label="Borracha">🧽</button>
+      <button id="desfazer" aria-label="Desfazer">↩️</button>
+      <span id="navDesenho" class="nav" hidden>
+        <button id="anterior" aria-label="Desenho anterior">◀</button>
+        <span id="contador" class="contador"></span>
+        <button id="proximo" aria-label="Próximo desenho">▶</button>
+      </span>
+      <button id="btnMais" aria-label="Mais opções">⋯</button>
+      <button id="btnRecolher" aria-label="Esconder ferramentas">⌄</button>
+    </nav>
+    <button id="fab" class="fab" aria-label="Mostrar ferramentas" hidden>🎨</button>
+  </section>
 
   <script src="js/historias.js"></script>
   <script src="js/historias-extra.js"></script>

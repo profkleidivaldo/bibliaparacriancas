@@ -1,81 +1,59 @@
-# 📖 Bíblia Ilustrada para Crianças
+# 📖 Bíblia Ilustrada
 
-Um projeto aberto de histórias bíblicas para crianças, com ilustrações de contorno para elas **colorirem na tela** (ou desenharem no papel e **fotografarem**). O desenho é diagramado junto com o texto da história, em uma página pronta para **imprimir ou salvar em PDF**.
+Histórias bíblicas para crianças, com desenhos para **colorir na tela do celular** (ou desenhar no papel e **fotografar**). O desenho é diagramado junto com o texto, em uma página pronta para **imprimir ou salvar em PDF**.
 
-Não precisa de instalação nem de servidor: é HTML, CSS e JavaScript puros.
+É HTML, CSS e JavaScript puros: não precisa de instalação nem de servidor.
 
 ## Como usar
 
-1. Abra `index.html` no navegador (ou publique no GitHub Pages, veja abaixo).
-2. Escolha uma história e leia o texto.
-3. Pinte o desenho com o dedo, o mouse ou a caneta, ou envie a foto de um desenho feito no papel.
-4. Se a história tiver mais de um desenho, use **Outro desenho**.
-5. Digite o nome do pequeno artista e clique em **Imprimir / Salvar PDF**.
+1. Abra `index.html` (ou o site publicado) e escolha uma história no **índice**.
+2. Pinte o desenho com o dedo. A barra de baixo tem cor, pincel, borracha, desfazer e as setas ◀ ▶ para trocar de desenho.
+3. O botão **⋯** abre mais opções: tamanho do pincel (na paleta de cores), mostrar o contorno, nome do artista, limpar, foto do papel, PNG e Imprimir / PDF.
+4. O botão **⌄** recolhe a barra e deixa só um 🎨 no canto da tela.
 
-O desenho fica salvo automaticamente no navegador (localStorage), por história.
+Cada desenho fica salvo automaticamente no navegador.
 
-> Para **baixar o PNG** com desenhos do banco de imagens, use o site publicado ou um servidor local (`python3 -m http.server`). Abrindo o arquivo direto do computador, o navegador bloqueia esse recurso.
+> Para **baixar o PNG**, use o site publicado ou um servidor local (`python3 -m http.server`). Abrindo o arquivo direto do computador, o navegador bloqueia esse recurso.
 
-## Histórias incluídas (14)
+## Histórias (20)
 
-**Antigo Testamento:** A Criação do Mundo (Gn 1) · Noé e a Arca (Gn 6–9) · Abraão e as Estrelas (Gn 12; 15; 21) · José e a Túnica Colorida (Gn 37–45) · O Bebê Moisés no Rio (Êx 2) · A Travessia do Mar Vermelho (Êx 14) · Davi e o Gigante Golias (1 Sm 17) · Daniel e os Leões (Dn 6) · Jonas e o Grande Peixe (Jn 1–3)
+**Antigo Testamento:** Criação · Noé e a Arca · Abraão e as Estrelas · A Escada de Jacó · José e a Túnica Colorida · O Bebê Moisés no Rio · A Sarça que Pegava Fogo · A Travessia do Mar Vermelho · Água que Saiu da Rocha · Josué e Calebe Confiam em Deus · A Serpente de Bronze · Davi e o Gigante Golias · O Azeite da Viúva · Jonas e o Grande Peixe · Daniel e os Leões
 
-**Novo Testamento:** O Nascimento de Jesus (Lc 2; Mt 2) · Jesus Acalma a Tempestade (Mc 4) · Cinco Pães e Dois Peixes (Jo 6) · Zaqueu Sobe na Árvore (Lc 19) · Jesus Está Vivo! (Mt 28; Lc 24; Jo 20)
+**Novo Testamento:** O Nascimento de Jesus · Jesus Acalma a Tempestade · Cinco Pães e Dois Peixes · Zaqueu Sobe na Árvore · Jesus Está Vivo!
 
 ## Estrutura
 
 ```
-index.html             página principal
-css/style.css          estilos (inclui o layout de impressão A4)
-js/historias.js        4 primeiras histórias e ilustrações em SVG
-js/historias-extra.js  demais histórias, ilustrações em SVG e ordem da lista
-js/app.js              desenho no canvas, foto, banco de imagens, download e impressão
-imagens/catalogo.js    lista de desenhos do banco de ilustrações (você preenche)
-imagens/               coloque aqui os arquivos de imagem
-CREDITOS.md            licenças e fontes
+index.html             índice e página da história
+css/style.css          estilos (celular primeiro) e layout de impressão A4
+js/historias.js        4 primeiras histórias
+js/historias-extra.js  demais histórias, ordem, ícones e ilustrações SVG de reserva
+js/app.js              índice, pintura, foto, PNG e impressão
+imagens/               desenhos para colorir (CC0) e imagens/catalogo.js
+CREDITOS.md            licenças e artistas
 ```
 
-## Banco de ilustrações bíblicas gratuito
+## Como adicionar uma história
 
-Cada história já vem com uma ilustração de contorno própria. Para oferecer também desenhos de um banco gratuito, o projeto tem um catálogo simples.
-
-A fonte que recomendo é o **CommonToAll**, no [FreeBibleimages.org](https://www.freebibleimages.org/): são desenhos em preto e branco para colorir, em **CC0 (domínio público)**, que permitem uso e adaptação, inclusive comercial. Os termos de download do conjunto pedem que se dê crédito a "CommonToAll.com / FreeBibleimages.org".
-
-Passo a passo:
-
-1. No FreeBibleimages, abra o conjunto da história e baixe a imagem (JPEG ou PNG). Leia o "Terms of Download" da página.
-2. Salve o arquivo em `imagens/`, por exemplo `imagens/noe-1.jpg`.
-3. Registre-o em `imagens/catalogo.js` usando o `id` da história:
-
-```js
-window.CATALOGO_IMAGENS = {
-  noe: [
-    { arquivo: "noe-1.jpg", credito: "CommonToAll.com / FreeBibleimages.org (CC0)" }
-  ]
-};
-```
-
-4. Pronto: a história passa a ter o botão **Outro desenho**, e o crédito aparece abaixo da imagem e na impressão.
-
-O fundo branco das imagens é ignorado automaticamente (efeito *multiply*), então a criança pinta por baixo dos traços pretos. Imagens com proporção 4:3 se encaixam melhor.
-
-Os ids das histórias estão no topo de `imagens/catalogo.js`. Mais detalhes sobre licenças em [CREDITOS.md](CREDITOS.md).
-
-## Como adicionar uma nova história
-
-Em `js/historias-extra.js`, acrescente um objeto à lista `novas` e inclua o `id` na lista `ORDEM`:
+Em `js/historias-extra.js`, inclua um objeto em `novas` e o `id` nas listas `ORDEM` (e em `NOVO`, se for do Novo Testamento) e em `ICONES`:
 
 ```js
 {
-  id: "ester",
-  titulo: "A Rainha Ester",
-  referencia: "Ester 4–8",
+  id: "ester", titulo: "A Rainha Ester", referencia: "Ester 4–8",
   texto: ["Primeiro parágrafo...", "Segundo parágrafo..."],
-  svg: SVG(`<circle cx="400" cy="300" r="100"/>`) // contorno SEM preenchimento
+  svg: SVG(`<circle cx="400" cy="300" r="100"/>`) // opcional: contorno SEM preenchimento
 }
 ```
 
-Dicas para as ilustrações: use apenas linhas (`fill="none"`), traços grossos e formas grandes, fáceis de colorir. Tela de 800×600. Há funções prontas em `historias-extra.js`: `sol`, `estrela`, `nuvem`, `onda`, `pessoa`, `peixe`.
+## Como adicionar desenhos do banco de imagens
+
+Os desenhos ficam em `imagens/` e são ligados às histórias em `imagens/catalogo.js`:
+
+```js
+noe: [{ arquivo: "noe-1.jpg", credito: "CommonToAll.com / FreeBibleimages.org (CC0)" }]
+```
+
+Use imagens de traço preto sobre fundo branco, de preferência 4:3 e com cerca de 800×600 px (`convert original.jpg -resize 800x600 -quality 80 -strip noe-1.jpg`). O fundo branco é ignorado, então a criança pinta por baixo dos traços. Veja [CREDITOS.md](CREDITOS.md) para fontes e licenças.
 
 ## Publicar no GitHub Pages
 
@@ -84,15 +62,8 @@ git remote add origin https://github.com/SEU-USUARIO/biblia-ilustrada.git
 git push -u origin main
 ```
 
-Depois, no repositório: **Settings → Pages → Branch: main / (root) → Save**. O site ficará em `https://SEU-USUARIO.github.io/biblia-ilustrada/`.
-
-## Ideias para o futuro
-
-- Mais histórias (Rute, Ester, Sansão, Jesus e as crianças, o Bom Samaritano…)
-- Modo "livro": juntar várias páginas num único PDF
-- Versão em outros idiomas
-- Ilustrações feitas por voluntários e por crianças
+No repositório: **Settings → Pages → Branch: main / (root) → Save**.
 
 ## Licença
 
-Código, textos e ilustrações originais sob [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.pt-br). Imagens de terceiros mantêm a licença de origem (veja [CREDITOS.md](CREDITOS.md)). Contribuições são bem-vindas!
+Código, textos e ilustrações SVG originais sob [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.pt-br). Os desenhos de `imagens/` são CC0 (veja [CREDITOS.md](CREDITOS.md)). Contribuições são bem-vindas!
