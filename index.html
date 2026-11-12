@@ -28,6 +28,9 @@
         <button id="limpar">🗑️ Limpar</button>
       </div>
       <label class="check"><input type="checkbox" id="contorno" checked> Mostrar contorno do desenho</label>
+      <div class="botoes">
+        <button id="outro" hidden>🔄 Outro desenho</button>
+      </div>
       <label class="arquivo">📷 Usar foto de um desenho feito no papel
         <input type="file" id="foto" accept="image/*">
       </label>
@@ -47,16 +50,19 @@
         <canvas id="desenho" width="800" height="600"></canvas>
         <img id="contornoImg" alt="Contorno para colorir" draggable="false">
       </div>
+      <p id="credito" class="credito"></p>
       <div id="texto" class="texto"></div>
       <p id="assinatura" class="assinatura"></p>
     </section>
   </main>
 
   <footer class="rodape">
-    Textos recontados em linguagem simples a partir da Bíblia. Ilustrações originais, livres para uso.
+    Textos recontados em linguagem simples a partir da Bíblia. Ilustrações originais do projeto e, quando indicado, desenhos de bancos gratuitos com os créditos abaixo da imagem. Veja CREDITOS.md.
   </footer>
 
   <script src="js/historias.js"></script>
+  <script src="js/historias-extra.js"></script>
+  <script src="imagens/catalogo.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>
