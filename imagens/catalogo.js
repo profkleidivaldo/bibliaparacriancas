@@ -1,18 +1,26 @@
-// Catálogo do banco de ilustrações (opcional).
+// Catálogo do banco de ilustrações.
 //
-// Aqui você liga desenhos de bancos gratuitos às histórias. Coloque o arquivo na pasta imagens/
-// (JPEG, PNG ou SVG de traço preto sobre fundo branco) e registre-o abaixo, usando o "id" da história.
-// O fundo branco é ignorado automaticamente, então a criança pinta "por baixo" do contorno.
+// Liga desenhos de bancos gratuitos às histórias. O arquivo fica em imagens/ (JPEG, PNG ou SVG de traço
+// preto sobre fundo branco; o branco é ignorado, então a criança pinta "por baixo" do contorno).
+// Cada história pode ter vários desenhos: a criança alterna entre eles pelas setas da barra de pintura.
 //
-// Quando uma história tem imagens aqui, aparece o botão "Outro desenho" para alternar entre
-// o desenho original do projeto e os do banco. Se o arquivo não existir, ele é simplesmente ignorado.
-//
-// Modelo de entrada:
-//   noe: [
-//     { arquivo: "noe-1.jpg", credito: "CommonToAll.com / FreeBibleimages.org (CC0)" },
-//   ],
-//
-// Ids disponíveis: criacao, noe, abraao, jose, moises, mar-vermelho, davi, daniel, jonas,
-//                  natal, tempestade, paes, zaqueu, ressurreicao
-window.CATALOGO_IMAGENS = {
-};
+// Para acrescentar uma imagem, salve-a em imagens/ e some uma entrada com o id da história:
+//   { arquivo: "noe-1.jpg", credito: "..." }
+// Confira sempre os termos de uso do conjunto antes (veja CREDITOS.md).
+(() => {
+  // Conjuntos CommonToAll (CC0), publicados em FreeBibleimages.org.
+  const CTA = "CommonToAll.com / FreeBibleimages.org (CC0)";
+  const serie = (id, n) =>
+    Array.from({ length: n }, (_, i) => ({ arquivo: `${id}-${i + 1}.jpg`, credito: CTA }));
+
+  window.CATALOGO_IMAGENS = {
+    jacob: serie("jacob", 4),
+    sarca: serie("sarca", 8),
+    "mar-vermelho": serie("mar-vermelho", 8),
+    "agua-rocha": serie("agua-rocha", 4),
+    "josue-calebe": serie("josue-calebe", 8),
+    serpente: serie("serpente", 4),
+    davi: serie("davi", 4),
+    eliseu: serie("eliseu", 4)
+  };
+})();
