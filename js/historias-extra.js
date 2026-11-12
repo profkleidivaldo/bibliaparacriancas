@@ -238,8 +238,78 @@
     <path d="M188 345l12-12l12 12"/>
     <path d="M0 560H800"/>`);
 
-  const ORDEM = ["criacao","noe","abraao","jose","moises","mar-vermelho","davi","daniel","jonas",
+  // Histórias que usam só os desenhos do banco (imagens/catalogo.js), sem SVG próprio.
+  novas.push(
+    {
+      id: "jacob", titulo: "A Escada de Jacó", referencia: "Gênesis 28:10-22",
+      texto: [
+        "Jacó estava viajando sozinho, longe de casa. Quando anoiteceu, ele pegou uma pedra para servir de travesseiro e dormiu ao ar livre.",
+        "Jacó sonhou com uma escada que ia da terra até o céu. Anjos de Deus subiam e desciam por ela.",
+        "No sonho, Deus lhe disse: “Eu estou com você e vou cuidar de você aonde quer que vá. Nunca vou abandoná-lo.”",
+        "Jacó acordou admirado: “Deus está aqui, e eu nem sabia!” De manhã, ele colocou a pedra em pé, derramou azeite sobre ela e chamou aquele lugar de Betel, que quer dizer “casa de Deus”."
+      ]
+    },
+    {
+      id: "sarca", titulo: "A Sarça que Pegava Fogo", referencia: "Êxodo 3–4",
+      texto: [
+        "Moisés cuidava das ovelhas no deserto, perto de um monte. Um dia ele viu uma coisa estranha: um arbusto estava pegando fogo, mas as chamas não o queimavam!",
+        "Moisés se aproximou para olhar. Então Deus o chamou do meio do arbusto: “Moisés! Moisés! Não chegue mais perto. Tire as sandálias, porque este lugar é santo.”",
+        "Deus disse: “Eu vi o sofrimento do meu povo no Egito. Quero que você vá até o faraó e conduza o meu povo para fora de lá.” Moisés ficou com medo: “Quem sou eu para fazer isso?”",
+        "Deus respondeu: “Eu estarei com você.” Mostrou a Moisés alguns sinais, como o cajado que virava serpente, e disse que o irmão dele, Arão, o ajudaria. Então Moisés obedeceu e foi."
+      ]
+    },
+    {
+      id: "agua-rocha", titulo: "Água que Saiu da Rocha", referencia: "Êxodo 17:1-7",
+      texto: [
+        "O povo de Deus caminhava pelo deserto e chegou a um lugar sem água. Todos estavam com muita sede: crianças, pais, avós e até os animais.",
+        "As pessoas ficaram nervosas e reclamaram com Moisés: “Vocês nos trouxeram até aqui para morrermos de sede?” Moisés pediu ajuda a Deus.",
+        "Deus disse: “Pegue o seu cajado e vá até a rocha. Eu estarei lá. Bata na rocha, e a água vai sair.”",
+        "Moisés bateu na rocha, e jorrou água fresquinha! O povo bebeu à vontade. Mais uma vez, Deus tinha cuidado deles."
+      ]
+    },
+    {
+      id: "josue-calebe", titulo: "Josué e Calebe Confiam em Deus", referencia: "Números 13–14",
+      texto: [
+        "Moisés enviou doze homens para espiar a terra que Deus havia prometido ao povo. Eles voltaram trazendo frutas enormes, como um cacho de uvas tão pesado que dois homens o carregavam num bastão.",
+        "Dez espias disseram: “A terra é boa, mas o povo de lá é forte, e nós somos pequenos demais!” O povo ouviu, ficou com medo e chorou a noite toda.",
+        "Mas dois espias, Josué e Calebe, disseram: “A terra é muito boa! Se Deus estiver conosco, ele nos ajudará. Não tenham medo!”",
+        "Por falta de confiança, o povo precisou esperar muitos anos no deserto. Josué e Calebe, que confiaram em Deus, entraram na terra prometida."
+      ]
+    },
+    {
+      id: "serpente", titulo: "A Serpente de Bronze", referencia: "Números 21:4-9",
+      texto: [
+        "O povo de Israel caminhava pelo deserto e ficou cansado e impaciente. Começaram a reclamar de Deus e de Moisés: “Por que nos trouxeram para cá?”",
+        "Então apareceram serpentes venenosas no acampamento, e muita gente foi picada. O povo percebeu que tinha errado e pediu: “Moisés, ore a Deus para que tire essas serpentes!”",
+        "Moisés orou. Deus lhe disse: “Faça uma serpente de bronze e coloque no alto de uma haste. Quem for picado e olhar para ela vai viver.”",
+        "Moisés fez como Deus mandou. Quem olhava para a serpente de bronze ficava curado. Deus cuidou do seu povo, mesmo depois de tanta reclamação."
+      ]
+    },
+    {
+      id: "eliseu", titulo: "O Azeite da Viúva", referencia: "2 Reis 4:1-7",
+      texto: [
+        "Uma mulher estava muito preocupada. Seu marido tinha morrido, e ela devia dinheiro a um homem que queria levar seus dois filhos para trabalharem para ele.",
+        "Ela pediu ajuda ao profeta Eliseu. Ele perguntou: “O que você tem em casa?” Ela respondeu: “Só um pouquinho de azeite numa jarra.”",
+        "Eliseu disse: “Peça emprestadas muitas vasilhas vazias aos vizinhos. Depois feche a porta e comece a encher todas elas.”",
+        "A mulher e os filhos obedeceram. Ela despejava o azeite, e ele não acabava, até todas as vasilhas ficarem cheias! Eliseu disse: “Venda o azeite, pague a sua dívida e viva com o que sobrar.” Deus cuidou daquela família."
+      ]
+    }
+  );
+
+  const ORDEM = ["criacao","noe","abraao","jacob","jose","moises","sarca","mar-vermelho","agua-rocha",
+                 "josue-calebe","serpente","davi","eliseu","jonas","daniel",
                  "natal","tempestade","paes","zaqueu","ressurreicao"];
+  const NOVO = ["natal","tempestade","paes","zaqueu","ressurreicao"];
+  const ICONES = {
+    criacao: "🌍", noe: "🚢", abraao: "⭐", jacob: "🪜", jose: "🧥", moises: "🧺", sarca: "🔥",
+    "mar-vermelho": "🌊", "agua-rocha": "💧", "josue-calebe": "🍇", serpente: "🐍", davi: "🪨",
+    eliseu: "🏺", jonas: "🐋", daniel: "🦁", natal: "🌟", tempestade: "⛈️", paes: "🍞",
+    zaqueu: "🌳", ressurreicao: "☀️"
+  };
   window.HISTORIAS.push(...novas);
   window.HISTORIAS.sort((a, b) => ORDEM.indexOf(a.id) - ORDEM.indexOf(b.id));
+  window.HISTORIAS.forEach((h) => {
+    h.testamento = NOVO.includes(h.id) ? "novo" : "antigo";
+    h.icone = ICONES[h.id] || "📖";
+  });
 })();
