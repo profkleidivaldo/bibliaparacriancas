@@ -86,17 +86,6 @@ window.HISTORIAS = [
       "Daniel continuou orando a Deus como sempre. Por isso, foi levado à cova dos leões. O rei, triste, disse: “O seu Deus vai salvá-lo.”",
       "Na manhã seguinte, o rei correu até a cova e chamou: “Daniel, você está vivo?” Daniel respondeu: “Deus mandou seu anjo e fechou a boca dos leões!”"
     ],
-    svg: S(`
-      <path d="M40 60H760V560H40Z"/>
-      <path d="M60 520C60 470 100 440 150 440H650C700 440 740 470 740 520"/>
-      <circle cx="400" cy="270" r="75"/>
-      <path d="M400 180c-30 0-45-25-35-45c10 20 30 22 35 22s25-2 35-22c10 20-5 45-35 45z"/>
-      <path d="M325 270c-40-10-70 20-60 60c15-20 40-30 62-22M475 270c40-10 70 20 60 60c-15-20-40-30-62-22"/>
-      <path d="M340 215c-45-25-80 5-65 40M460 215c45-25 80 5 65 40"/>
-      <path d="M365 255a8 8 0 1 0 0.1 0M435 255a8 8 0 1 0 0.1 0"/>
-      <path d="M385 285l15 15l15-15zM400 300v22M370 335c15 12 45 12 60 0"/>
-      <path d="M110 90a40 40 0 1 1 0.1 0M110 140v60M110 150l-30 35M110 150l30 35M110 200l-25 55M110 200l25 55"/>
-      <path d="M170 90l24 14M170 130l28-4M170 170l24 -14"/>
-      <path d="M640 120l12 28l30 3l-23 20l7 30l-26-16l-26 16l7-30l-23-20l30-3z"/>`)
+    svg: "" // desenhada em historias-extra.js (usa as funções de apoio de lá)
   }
 ];

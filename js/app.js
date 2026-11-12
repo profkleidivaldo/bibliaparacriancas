@@ -15,6 +15,31 @@
   const svgUrl = (h) => "data:image/svg+xml;charset=utf-8," + encodeURIComponent(h.svg);
   const chave = (h) => "biblia-ilustrada:" + h.id;
 
+  // Opções de contorno por história: o SVG original do projeto + imagens do banco (imagens/catalogo.js)
+  let opcoes = [], idxOpcao = 0;
+
+  function mostrarOpcao() {
+    const o = opcoes[idxOpcao];
+    contornoImg.src = o.url;
+    el("credito").textContent = idxOpcao && o.credito ? "Contorno: " + o.credito : "";
+    el("outro").hidden = opcoes.length < 2;
+  }
+  function montarOpcoes(h) {
+    const lista = [{ url: svgUrl(h), credito: "" }];
+    opcoes = lista; idxOpcao = 0;
+    mostrarOpcao();
+    const extras = (window.CATALOGO_IMAGENS || {})[h.id] || [];
+    extras.forEach((item) => {
+      const im = new Image();
+      im.onload = () => {
+        if (opcoes !== lista) return; // a criança já trocou de história
+        lista.push({ url: "imagens/" + item.arquivo, credito: item.credito || "" });
+        el("outro").hidden = lista.length < 2;
+      };
+      im.src = "imagens/" + item.arquivo;
+    });
+  }
+
   function fundoBranco() { ctx.fillStyle = "#fff"; ctx.fillRect(0, 0, W, H); }
 
   function salvar() {
@@ -40,7 +65,7 @@
     el("titulo").textContent = h.titulo;
     el("referencia").textContent = h.referencia;
     el("texto").innerHTML = h.texto.map((p) => `<p>${p}</p>`).join("");
-    contornoImg.src = svgUrl(h);
+    montarOpcoes(h);
     el("contorno").checked = true;
     contornoImg.style.display = "";
     document.querySelectorAll("#historias button").forEach((b) =>
@@ -95,6 +120,7 @@
   el("desfazer").onclick = () => { const s = pilha.pop(); if (s) { ctx.putImageData(s, 0, 0); salvar(); } };
   el("limpar").onclick = () => { if (confirm("Apagar todo o desenho desta história?")) { empilhar(); fundoBranco(); salvar(); } };
   el("contorno").onchange = (e) => { contornoImg.style.display = e.target.checked ? "" : "none"; };
+  el("outro").onclick = () => { idxOpcao = (idxOpcao + 1) % opcoes.length; mostrarOpcao(); };
   el("nome").oninput = (e) => {
     const n = e.target.value.trim();
     el("assinatura").textContent = n ? "Ilustrado por " + n : "";
@@ -123,14 +149,26 @@
     const o = out.getContext("2d");
     o.drawImage(canvas, 0, 0);
     const fechar = () => {
-      const a = document.createElement("a");
-      a.download = "desenho-" + atual.id + ".png";
-      a.href = out.toDataURL("image/png"); a.click();
+      try {
+        const a = document.createElement("a");
+        a.download = "desenho-" + atual.id + ".png";
+        a.href = out.toDataURL("image/png"); a.click();
+      } catch (e) {
+        alert("Não foi possível baixar ao abrir o arquivo direto do computador. Use o site publicado (GitHub Pages) ou um servidor local.");
+      }
     };
     if (el("contorno").checked) {
       const img = new Image();
-      img.onload = () => { o.drawImage(img, 0, 0, W, H); fechar(); };
-      img.src = svgUrl(atual);
+      img.onload = () => {
+        // "multiply" faz o fundo branco do contorno sumir e mantém só os traços pretos
+        const k = Math.min(W / img.naturalWidth, H / img.naturalHeight);
+        const w = img.naturalWidth * k, h = img.naturalHeight * k;
+        o.globalCompositeOperation = "multiply";
+        o.drawImage(img, (W - w) / 2, (H - h) / 2, w, h);
+        o.globalCompositeOperation = "source-over";
+        fechar();
+      };
+      img.src = opcoes[idxOpcao].url;
     } else fechar();
   };
   el("imprimir").onclick = () => window.print();
