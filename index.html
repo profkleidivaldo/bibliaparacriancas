@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bíblia Ilustrada para Crianças</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="topo">
+    <h1>📖 Bíblia Ilustrada para Crianças</h1>
+    <p>Escolha uma história, leia, colora o desenho e monte a sua página!</p>
+  </header>
+
+  <nav id="historias" class="historias" aria-label="Histórias"></nav>
+
+  <main class="area">
+    <section class="ferramentas" aria-label="Ferramentas de desenho">
+      <h2>🎨 Ferramentas</h2>
+      <div id="cores" class="cores"></div>
+      <label>Tamanho do pincel
+        <input type="range" id="tamanho" min="2" max="40" value="10">
+      </label>
+      <div class="botoes">
+        <button id="pincel" class="ativo">🖌️ Pincel</button>
+        <button id="borracha">🧽 Borracha</button>
+        <button id="desfazer">↩️ Desfazer</button>
+        <button id="limpar">🗑️ Limpar</button>
+      </div>
+      <label class="check"><input type="checkbox" id="contorno" checked> Mostrar contorno do desenho</label>
+      <label class="arquivo">📷 Usar foto de um desenho feito no papel
+        <input type="file" id="foto" accept="image/*">
+      </label>
+      <label>Seu nome
+        <input type="text" id="nome" maxlength="40" placeholder="Ilustrado por...">
+      </label>
+      <div class="botoes">
+        <button id="baixar">⬇️ Baixar desenho (PNG)</button>
+        <button id="imprimir" class="destaque">🖨️ Imprimir / Salvar PDF</button>
+      </div>
+    </section>
+
+    <section id="pagina" class="pagina" aria-label="Página da história">
+      <h2 id="titulo"></h2>
+      <p id="referencia" class="referencia"></p>
+      <div class="quadro" id="quadro">
+        <canvas id="desenho" width="800" height="600"></canvas>
+        <img id="contornoImg" alt="Contorno para colorir" draggable="false">
+      </div>
+      <div id="texto" class="texto"></div>
+      <p id="assinatura" class="assinatura"></p>
+    </section>
+  </main>
+
+  <footer class="rodape">
+    Textos recontados em linguagem simples a partir da Bíblia. Ilustrações originais, livres para uso.
+  </footer>
+
+  <script src="js/historias.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
